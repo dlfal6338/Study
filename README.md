@@ -35,7 +35,20 @@
   - models.py -> edit()
   - views.py -> edit()
 - 게시글 삭제
+  - models.py -> post객체 이용
+  - views.py -> delete()
 - 게시글 검색
+  - models.py -> search()
+  - views.py -> index()
 - 게시글 조회수
+  - models.py -> view()
+  - views.py -> posting()
+- 댓글 조회
+  - models.py -> comment2()
+  - views.py -> posting()
 - 댓글 작성
+  - models.py -> comment()
+  - views.py -> comment()
 - 댓글 삭제
+  - models.py -> comment_del()
+  - views.py -> comment_delete()
