@@ -1,6 +1,6 @@
 # Study
-SK Shieldus Rookies
-장고를 사용한 취약한 웹페이지
+- SK Shieldus Rookies
+- 장고를 사용한 취약한 웹페이지
 
 # 팀원
 - 신혁수
