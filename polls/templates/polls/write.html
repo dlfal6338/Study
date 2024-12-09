@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>글쓰기 페이지</title>
+</head>
+<body>
+    <h1>글쓰기 페이지</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    <script>alert('{{ message }}')</script>
+                </div>
+                {% endfor %}
+        {% endif %}
+        작성자 {{ request.session.name }} <br>
+        제목<br>
+        <input type="text" name="title" value = {{post.title}} ><br>
+        내용<br>
+        <textarea rows="10" cols="50" name="contents" value={{post.contents}}></textarea><br>
+        <input type="file" name="imgfile"><br>
+        <input type="submit" value="write">
+    </form>
+</body>
+</html>

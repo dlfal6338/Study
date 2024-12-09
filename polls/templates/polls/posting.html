@@ -1,0 +1,83 @@
+<html>
+    <head>
+        <title>Posting!</title>
+    </head>
+    <body>
+        <h1 align="center">자유 게시판</h1>
+        <form action="" method = "POST">
+            {% csrf_token %}
+            {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    <script>alert('{{ message }}')</script>
+                </div>
+                {% endfor %}
+            {% endif %}
+
+                <div class="post-header">
+                    제목: {{ post.title }}
+                </div>
+                <div class="post-details">
+                    
+                    <span>작성자: <span class="author-name">{{ post.email }}</span></span>
+                    <span>작성일: {{ post.created_at|date:"y.m.d" }} {{ post.created_at|time:"H:i" }}</span>
+                    <span>조회: {{ post.views }}</span>
+
+                </div>
+                <div class="post-contents">
+
+                    <span>내용 : {{post.contents|safe}}
+
+                </div>
+                {% if filename %}
+
+                <label>
+                    첨부 파일 : <a href="{% url 'polls:download' filename=filename %}" download>{{ filename }}</a>
+                </label>
+
+                {% else  %}
+  
+                <label>
+                    첨부 파일 : 파일 없음
+                </label>
+
+                {% endif %}
+                {% if user_email == post.email %}
+
+                <div class="post-edit">
+                    <span><button type="submit">수정</button></span>
+                    <!--<span><button type="submit" onclick="window.location.href='/board/edit?id={{ post.pk }}'">수정</button></span>-->
+                    <span><button type="button" onclick="window.location.href='/board/delete?id={{ post.pk }}'">삭제</button></span>
+                </div>
+
+            {% else %}
+                <p>이 글을 수정할 권한이 없습니다.</p>
+            {% endif %}
+        </form>
+        <hr>
+        <form action="{% url 'polls:comment' %}" method = "POST">
+            {% csrf_token %}
+            {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    <script>alert('{{ message }}')</script>
+                </div>
+                {% endfor %}
+            {% endif %}
+            {% for comment in comments %}
+            <li>
+                <strong>Comment:</strong> {{ comment.1 }} <br>
+                <strong>ID:</strong> {{ comment.2 }} <br>
+                <strong>Email:</strong> {{ comment.3 }} <br>
+                <strong>Created at:</strong> {{ comment.4|date:"Y-m-d H:i" }} <br>
+                {% if user_email == comment.3 %}
+                <span><button type="button" onclick="window.location.href='/board/comment_delete?id={{ comment.0 }}'">삭제</button></span>
+                {% endif %}
+            </li>
+            {% endfor %}
+            <input type="text" name="comment" placeholder="comment...">
+            <input type="submit" name="send">
+            <input type="hidden" value="{{request.GET.id}}" name="id">
+        </form>
+    </body>
+</html>
