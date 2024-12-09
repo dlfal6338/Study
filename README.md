@@ -1,6 +1,14 @@
 # Study
 SK Shieldus Rookies
 
+# 팀원
+- 신혁수
+- 이대재
+- 박수홍
+- 조경아
+- 박소민
+- 박종빈
+
 # Account
 - 회원가입
 - 로그인 1번
