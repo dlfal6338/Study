@@ -2,7 +2,7 @@
 SK Shieldus Rookies
 
 # Account
-- 계정 생성
+- 회원가입
 - 로그인 1번
 - 로그인 2번
 
