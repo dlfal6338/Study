@@ -12,10 +12,14 @@
 
 # Account
 - 회원가입
-  - models.py -> CustomUser
-  - views.py -> def register(request)
+  - models.py -> class CustomUser
+  - views.py -> register
 - 로그인 1번
+  - models.py -> Login_Check
+  - views.py -> login
 - 로그인 2번
+  - models.py -> Login_Check2
+  - views.py -> login2
 
 # Polls
 - 게시글 목록
