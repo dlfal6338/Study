@@ -12,17 +12,18 @@
 
 # Account
 - 회원가입
-  - models.py -> class CustomUser
-  - views.py -> register
+  - models.py -> class CustomUser()
+  - views.py -> register()
 - 로그인 1번
-  - models.py -> Login_Check
-  - views.py -> login
+  - models.py -> Login_Check()
+  - views.py -> login()
 - 로그인 2번
-  - models.py -> Login_Check2
-  - views.py -> login2
+  - models.py -> Login_Check2()
+  - views.py -> login2()
 
 # Polls
 - 게시글 목록
+  - models.py -> list()
 - 게시글 작성
 - 게시글 수정
 - 게시글 삭제
