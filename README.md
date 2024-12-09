@@ -12,6 +12,8 @@
 
 # Account
 - 회원가입
+  - models.py -> CustomUser
+  - views.py -> def register(request)
 - 로그인 1번
 - 로그인 2번
 
