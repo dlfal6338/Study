@@ -52,3 +52,8 @@
 - 댓글 삭제
   - models.py -> comment_del()
   - views.py -> comment_delete()
+- 파일 다운로드
+  - views.py -> download()
+- 파일 업로드
+  - models.py -> write()
+  - views.py -> write()
