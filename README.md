@@ -24,8 +24,16 @@
 # Polls
 - 게시글 목록
   - models.py -> list()
+  - views.py -> index()
+- 게시글 접근
+  - models.py -> posting()
+  - views.py -> posting()
 - 게시글 작성
+  - models.py -> write()
+  - views.py -> write()
 - 게시글 수정
+  - models.py -> edit()
+  - views.py -> edit()
 - 게시글 삭제
 - 게시글 검색
 - 게시글 조회수
