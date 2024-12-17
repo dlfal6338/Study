@@ -46,3 +46,25 @@ def Login_Check2(**dic):
     return result
 
 pass
+
+def pass_check(**dic):
+    email = dic['email']
+    password = dic['password']
+    query = f"SELECT password FROM users WHERE email = '{email}' AND password = '{password}'"
+    with connection.cursor() as cursor:
+        cursor.execute(query)
+        result = cursor.fetchall()
+    return result
+
+pass
+
+def change_password(**dic):
+    email = dic['email']
+    password = dic['change_password']
+    query = f"update users set password = '{password}' where email = '{email}'"
+    with connection.cursor() as cursor:
+        cursor.execute(query)
+        connection.commit()
+        result = cursor.fetchall()
+    print(query)
+    return result

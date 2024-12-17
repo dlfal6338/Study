@@ -101,3 +101,23 @@ def login2(request):
     
     return render(request, 'accounts/login2.html')
 pass
+
+def mypage(request):
+    email = request.session.get('email')
+    if request.method =='POST':
+        password = request.POST.get("password1")
+        dic={"email":email,"password":password}
+        result = models.pass_check(**dic)
+        print(result)
+        if result:
+            change_password1 = request.POST.get("password2")
+            change_password2 = request.POST.get("password3")
+            if change_password1==change_password2:
+                dic={"email":email,"change_password":change_password1}
+                models.change_password(**dic)
+                if 'email' in request.session:
+                    del request.session['email']
+                    del request.session['name']
+                messages.success(request, '비밀번호 변경이 완료되었습니다.')
+                return redirect('main:main')
+    return render(request,'accounts/mypage.html')
