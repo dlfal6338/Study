@@ -5,6 +5,13 @@
             <h1> 메인 페이지 </h1>
             <p>로그인 쿼리가 다른 페이지</p>
             {% csrf_token %}
+            {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                <script>alert('{{ message }}')</script>
+                </div>
+            {% endfor %}
+            {% endif %}
             <button type="button" value="login1" name="action" onclick="location.href='/accounts/login'">1번 로그인</button>
             <button type="button" value="login1" name="action" onclick="location.href='/accounts/login2'">2번 로그인</button>
         </form>

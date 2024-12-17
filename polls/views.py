@@ -1,6 +1,7 @@
 # polls/views.py
 
 from django.shortcuts import render,redirect ,get_object_or_404,HttpResponseRedirect
+from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.contrib import messages
 from django.http import Http404
@@ -11,6 +12,7 @@ from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 import os
 from django.http import FileResponse
+
 
 # Create your views here.
 def index(request):
@@ -37,15 +39,21 @@ def index(request):
     if request.GET.get('action')=="search":
         try:
             keyword = request.GET.get('search')
-            boards = m.search(keyword)
-            return render(request, 'polls/index.html', {'boards': boards})
+            if keyword == '':
+                messages.error(request,'검색어 입력')
+            else:
+                page_obj = m.search(keyword)
+                return render(request, 'polls/index.html', {'page_obj': page_obj})
         except Exception as e:
             messages.error(request,f'{e}존재하지 않는 게시글 입니다.')
         return redirect('polls:index')
-    else:
-        boards = m.list()
-        print(boards)
-        return render(request, 'polls/index.html', {'boards': boards})
+    boards = m.list()
+    paginator = Paginator(boards, 5) # 페이지 당 3개의 아이템을 보여줌
+    page_number = request.GET.get('page')
+    if not page_number:
+        return redirect('/board/list?page=1')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'polls/index.html', {'page_obj': page_obj})
 
 # blog의 게시글(posting)을 부르는 posting 함수
 def posting(request):

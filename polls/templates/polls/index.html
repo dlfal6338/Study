@@ -12,8 +12,10 @@
                 {% endfor %}
             {% endif %}
             <p align="right">{{ request.session.name }} ({{ request.session.email }})님
+            <button type="button" onclick='location.href="/accounts/mypage"'>마이페이지</button>
             <button type="submit" value="세션삭제1" name="action">로그아웃</button></p> 
         </form>
+        
         <form action="" method="get" align="right">
             <input type="search" name="search" placeholder="Search...">
             <button type="submit" value="search" name="action">검색</button>
@@ -27,7 +29,7 @@
                     <th>작성일</th>
                     <th>조회수</th>
                 </tr>
-                {% for list in boards %}
+                {% for list in page_obj %}
                 <tr>
                     <td align="center" width="50">{{ list.0 }}</td>
                     <td width="200"><a href="view?id={{ list.0 }}">{{ list.1 }}</a></td>
@@ -37,6 +39,23 @@
                 </tr>
                 {% endfor %}
             </table>
+        </div>
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; 처음 페이지</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">이전 페이지</a>
+                {% endif %}
+        
+                <span class="current-page">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+        
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">다음 페이지</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">마지막 페이지 &raquo;</a>
+                {% endif %}
+            </span>
         </div>
         <button onclick='location.href="/board/write"'>게시글 작성</button>
         <style>
